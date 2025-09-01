@@ -39,12 +39,14 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'customer', // Automatically assign customer role to registered users
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect customers to customer welcome page instead of dashboard
+        return redirect()->route('customer.welcome');
     }
 }

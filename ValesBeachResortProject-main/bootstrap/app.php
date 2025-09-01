@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
             'check.blocked' => \App\Http\Middleware\CheckIfBlocked::class,
+            'check.dashboard' => \App\Http\Middleware\CheckDashboardAccess::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
